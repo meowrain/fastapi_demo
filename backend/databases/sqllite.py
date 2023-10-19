@@ -15,3 +15,8 @@ def get_blog(id:int):
         statement = select(Blog).where(Blog.id == id)
         blog = session.exec(statement).first()
         return blog
+    
+def create_user(user):
+    with Session(engine) as session:
+        session.add(user)
+        session.commit() 

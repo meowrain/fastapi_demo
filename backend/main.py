@@ -1,10 +1,31 @@
 from fastapi import FastAPI,status
-from databases.sqllite import create_tables,add_blog,get_blog
-from databases.models import Blog
-from schemas import blog_schema
+from databases.sqllite import create_tables,add_blog,get_blog,create_user
+from databases.models import Blog,Users
+from schemas import blog_schema,login_signin_schema
 import uvicorn
 
+
+from middleware.cors import setCors
 app = FastAPI()
+setCors(app)
+
+@app.post('/login',status_code=status.HTTP_200_OK)
+def login(request: login_signin_schema.Login):
+    username = request.username
+    password = request.password
+    pass
+
+@app.post('/signin',status_code=status.HTTP_201_CREATED)
+def signin(request: login_signin_schema.Signin):
+    create_tables()
+    user = Users(username=f"{request.username}",password=f"{request.password}")
+    create_user(user)
+    response_data = {
+        "query": "OK",
+        **request.dict()
+    }
+    return response_data
+
 
 @app.post('/blog',status_code=status.HTTP_201_CREATED)
 def create(request:blog_schema.Blog):

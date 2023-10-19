@@ -4,4 +4,8 @@ class Blog(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True,index=True)
     title: str
     body: Optional[str] = None
-    
+
+class Users(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True,index=True)
+    username: str
+    password: str

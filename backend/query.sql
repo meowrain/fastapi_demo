@@ -1,1 +1,1 @@
-SELECT * FROM Blog
+SELECT * FROM users
