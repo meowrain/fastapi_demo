@@ -1,26 +1,14 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import SignInViews from './views/SignInViews.vue';
-import DemoView from './views/DemoView.vue';
+import { RouterView } from 'vue-router'
+import NavBarComponent from './components/NavBarComponent.vue'
 </script>
 
 <template>
   <header>
-
-    <div class="wrapper">
-      <!-- <HelloWorld msg="You did it!" /> -->
-      <!-- <SignInViews /> -->
-      <DemoView></DemoView>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <NavBarComponent></NavBarComponent>
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

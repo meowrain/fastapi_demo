@@ -3,9 +3,12 @@ from databases.models import Blog
 from databases.sqllite import create_tables,add_blog,get_blog,del_blog
 
 from schemas import blog_schema
-router = APIRouter()
+router = APIRouter(
+    prefix='/blog',
+    tags=["blog"]
+)
 
-@router.post('/blog',status_code=status.HTTP_201_CREATED,tags=["blog"])
+@router.post('/',status_code=status.HTTP_201_CREATED)
 def create(request:blog_schema.Blog):
     create_tables()
     blog = Blog(title=f"{request.title}",body=f"{request.body}")
@@ -16,7 +19,7 @@ def create(request:blog_schema.Blog):
     }
     return response_data
 
-@router.get('/blog/{id}',status_code=status.HTTP_200_OK,tags=["blog"])
+@router.get('/{id}',status_code=status.HTTP_200_OK)
 def get_content(id:int):
     response = {
         "query": "OK",
@@ -24,7 +27,7 @@ def get_content(id:int):
     }
     return response
 
-@router.delete('/blog',tags=["blog"])
+@router.delete('/')
 def delete_content(id: int = Query(default=...,description="要删除的博客的id")):
     result = del_blog(id)  # 调用删除博客的函数
     if result == 'OK':
